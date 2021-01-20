@@ -2,15 +2,15 @@
   (:gen-class))
 
 (def questions
-     "A bunch of questions"
-     (for [x (range 1 13)
-           y (range 1 13)]
-          {:x x
-           :y y
-           :question       (str x " * " y " = ")
-           :correct-answer (str (* x y))
-           :correct        nil
-           :time-taken     0}))
+  "A bunch of questions"
+  (for [x (range 1 13)
+        y (range 1 13)]
+    {:x x
+    :y y
+    :question       (str x " * " y " = ")
+    :correct-answer (str (* x y))
+    :correct        nil
+    :time-taken     0}))
 
 (defn input
   "Accept user input with a prompt"
@@ -48,7 +48,6 @@
   (let [{correct true incorrect false} (group-by :correct answers)
          num_answers (count answers)
          num_correct (count correct)
-         ;            num_incorrect (count incorrect)
          total_time (reduce + (map :time-taken answers))]
     (println (format "You scored %s out of %d" num_correct num_answers))
     (println (format "Total time taken %.1f seconds" total_time))
