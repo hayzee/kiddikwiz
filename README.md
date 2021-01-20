@@ -1,36 +1,26 @@
 # kiddikwiz
 
-FIXME: description
+Let's face it, math<b>s</b> sucks.
 
 ## Installation
 
-Download from http://example.com/FIXME.
+Clone the repo.
 
 ## Usage
 
-FIXME: explanation
-
-    $ java -jar kiddikwiz-0.1.0-standalone.jar [args]
+lein run
 
 ## Options
 
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
+There are no options.
 
 ### Bugs
 
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+What's a bug?
 
 ## License
 
-Copyright © 2021 FIXME
+Copyright © 2021 Hayzee
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
