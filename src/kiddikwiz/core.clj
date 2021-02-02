@@ -1,18 +1,19 @@
 (ns kiddikwiz.core
-  (:gen-class))
+  (:gen-class)
+  (:import (java.util Date)))
 
 (def questions
   "A bunch of questions"
   (for [x (range 1 13)
         y (range 1 13)]
-      {:no  nil
-       :x   x
-       :y   y
-       :question       (str x " * " y " = ")
-       :correct-answer (str (* x y))
-       :answer         nil
-       :correct        nil
-       :time-taken     nil}))
+    {:no  nil
+     :x   x
+     :y   y
+     :question       (str x " * " y " = ")
+     :correct-answer (str (* x y))
+     :answer         nil
+     :correct        nil
+     :time-taken     nil}))
 
 (defn select-questions [questions n]
   "Select n random questions, number them"
@@ -29,7 +30,7 @@
     (flush)
     (read-line)))
 
-(defn datediff
+(defn date-diff
   "Difference (in seconds) between two dates"
   [d1 d2]
   (double (/ (- (.getTime d2) (.getTime d1)) 1000)))
@@ -37,9 +38,9 @@
 (defn ask-question
   "Ask a question and assoc the response"
   [question]
-  (let [tstart     (java.util.Date.)
+  (let [tstart     (Date.)
         answer     (input (str "Question " (:no question) " : " (:question question)))
-        time-taken (datediff tstart (java.util.Date.))]
+        time-taken (date-diff tstart (Date.))]
     (assoc question
       :answer  answer
       :correct (= answer (question :correct-answer))
@@ -56,16 +57,16 @@
     (do
       (println "You answered the following questions incorrectly:")
       (doseq [w wrong]
-             (println (str "Question " (w :no) ": " (w :question) (w :correct-answer) ", you answered " (w :answer)))))))
+        (println (str "Question " (w :no) ": " (w :question) (w :correct-answer) ", you answered " (w :answer)))))))
 
 (defn show-results
   "Show the results of a round of questions"
   [answers]
-  (intern *ns* 'answers answers) ;; todo - get rid
-  (let [{correct true incorrect false} (group-by :correct answers)
-         num_answers (count answers)
-         num_correct (count correct)
-         total_time (reduce + (map :time-taken answers))]
+  (intern *ns* 'answers answers) ;; todo - get rid cheat's debugging
+  (let [{correct true _incorrect false} (group-by :correct answers)
+        num_answers (count answers)
+        num_correct (count correct)
+        total_time (reduce + (map :time-taken answers))]
     (println "================================================")
     (println (format "You scored %s out of %d" num_correct num_answers))
     (println (format "Total time taken %.1f seconds" total_time))
@@ -93,6 +94,6 @@
 
 (defn -main
   "Main entry point"
- [& args]
+  [& _args]
   (play))
 
