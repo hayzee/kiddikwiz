@@ -53,17 +53,17 @@
 
 (defn show-incorrect
   [answers]
-  (if-let [wrong (seq (filter (complement :correct) answers))]
+  (if (seq answers)
     (do
       (println "You answered the following questions incorrectly:")
-      (doseq [w wrong]
+      (doseq [w answers]
         (println (str "Question " (w :no) ": " (w :question) (w :correct-answer) ", you answered " (w :answer)))))))
 
 (defn show-results
   "Show the results of a round of questions"
   [answers]
   (intern *ns* 'answers answers) ;; todo - get rid cheat's debugging
-  (let [{correct true _incorrect false} (group-by :correct answers)
+  (let [{correct true incorrect false} (group-by :correct answers)
         num_answers (count answers)
         num_correct (count correct)
         total_time (reduce + (map :time-taken answers))]
@@ -71,7 +71,8 @@
     (println (format "You scored %s out of %d" num_correct num_answers))
     (println (format "Total time taken %.1f seconds" total_time))
     (println (format "Average time per question %.1f seconds" (/ total_time num_answers)))
-    (show-incorrect answers)
+;;    (show-incorrect answers)
+    (show-incorrect incorrect)
     (println "================================================")))
 
 (defn round
