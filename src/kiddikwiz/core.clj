@@ -15,8 +15,9 @@
      :correct        nil
      :time-taken     nil}))
 
-(defn select-questions [questions n]
+(defn select-questions
   "Select n random questions, number them"
+  [questions n]
   (->>
     (shuffle questions)
     (take n)
