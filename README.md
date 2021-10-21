@@ -1,6 +1,7 @@
 # kiddikwiz
 
 A command line program that asks rapid-fire numeracy questions.
+
 I wrote this for my kids to help with their times tables.
 
 They ignored me!
